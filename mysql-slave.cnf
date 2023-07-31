@@ -1,3 +1,4 @@
 [mysqld]
-server-id=2
-replicate-do-db=mydb
+server-id = 2
+log_bin = 1
+binlog_do_db = mydb
