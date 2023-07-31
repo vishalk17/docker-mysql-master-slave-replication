@@ -1,5 +1,23 @@
 #!/bin/bash
 
+## start containers
+
+docker-compose up -d
+
+##### wait until mysql container ready
+until docker exec mysql-master sh -c 'mysql -uroot -proot -e ";"'
+do
+    echo "Waiting for mysql-master database connection..."
+    sleep 4
+done
+
+until docker exec mysql-master sh -c 'mysql -uroot -proot -e ";"'
+do
+    echo "Waiting for mysql-slave database connection..."
+    sleep 4
+done
+
+
 ################### Master Start ###################
 
 # User already created in docker-compose,
