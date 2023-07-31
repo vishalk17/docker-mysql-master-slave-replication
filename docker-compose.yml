@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  mysql-master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql-master
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: vishal
+      MYSQL_PASSWORD: vishal@123
+    volumes:
+      - ./mysql-master-data:/var/lib/mysql
+      - ./mysql-master.cnf:/etc/mysql/mysql.conf.d/mysql.cnf
+    networks:
+      - my-network
+    ports:
+      - "3306:3306"
+
+  mysql-slave:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql-slave
+    restart: always
+    depends_on:
+      - mysql-master
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: vishal
+      MYSQL_PASSWORD: vishal@123
+    volumes:
+      - ./mysql-slave-data:/var/lib/mysql
+      - ./mysql-slave.cnf:/etc/mysql/mysql.conf.d/mysql.cnf
+    networks:
+      - my-network
+    ports:
+      - "3307:3306"
+
+networks:
+  my-network:
+    driver: bridge
