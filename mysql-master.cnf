@@ -2,6 +2,6 @@
 bind_address=0.0.0.0
 
 server-id = 1
-log_bin = 1
+log_bin = vishalk17
 binlog_format = ROW
 binlog_do_db = mydb
