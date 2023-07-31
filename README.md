@@ -11,8 +11,7 @@ Requirements
 Instructions
 
     Clone this repo.
-    In the repo directory, run >   docker-compose up -d
-    Wait for the containers to start
+
     Run >     bash replication.sh
 
 Verification
